@@ -25,11 +25,13 @@ requirements:
   build:
     - posix                # [win]
     - {{native}}toolchain  # [win]
-    - {{compiler('c')}}    # [not win]
+    - {{compiler('c')}}    # [linux]
+    - llvm-openmp          # [osx]
   host:
     - r-base
   run:
     - r-base
+    - llvm-openmp          # [osx]
 
 test:
   commands:
