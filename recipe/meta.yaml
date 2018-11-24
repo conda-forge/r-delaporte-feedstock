@@ -26,6 +26,7 @@ requirements:
     - posix                # [win]
     - {{native}}toolchain  # [win]
     - {{compiler('c')}}    # [linux]
+    - {{compiler('fortran') }}  # [not win]
     - llvm-openmp          # [osx]
   host:
     - r-base
