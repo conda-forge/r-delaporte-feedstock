@@ -15,23 +15,24 @@ source:
   sha256: e0778e3837eab3c5a0884b7d2b51671e479a775a9423e2edda8d566fac289830
 
 build:
-  number: 0
-  skip: true  # [win32]
-
+  number: 1000
+  merge_build_host: true  # [win]
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - r-base
     - posix                # [win]
     - {{native}}toolchain  # [win]
-    - gcc                  # [not win]
-
+    - {{compiler('c')}}    # [linux]
+    - {{compiler('fortran') }}  # [not win]
+    - llvm-openmp          # [osx]
+  host:
+    - r-base
   run:
     - r-base
-    - libgcc  # [not win]
+    - llvm-openmp          # [osx]
 
 test:
   commands:
