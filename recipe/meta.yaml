@@ -1,4 +1,4 @@
-{% set version = "6.3.0" %}
+{% set version = "7.0.1" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,10 +12,10 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/Delaporte_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/Delaporte/Delaporte_{{ version }}.tar.gz
-  sha256: e0778e3837eab3c5a0884b7d2b51671e479a775a9423e2edda8d566fac289830
+  sha256: c702b97dcbecd698708ac58c813a09eb66bc14fee6fd6a1ccea0f3aa5e1a851c
 
 build:
-  number: 1001
+  number: 0
   merge_build_host: true  # [win]
   rpaths:
     - lib/R/lib/
