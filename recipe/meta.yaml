@@ -15,7 +15,7 @@ source:
   sha256: e0778e3837eab3c5a0884b7d2b51671e479a775a9423e2edda8d566fac289830
 
 build:
-  number: 1000
+  number: 1001
   merge_build_host: true  # [win]
   rpaths:
     - lib/R/lib/
@@ -24,7 +24,8 @@ build:
 requirements:
   build:
     - posix                # [win]
-    - {{native}}toolchain  # [win]
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
     - {{compiler('c')}}    # [linux]
     - {{compiler('fortran') }}  # [not win]
     - llvm-openmp          # [osx]
@@ -53,6 +54,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - conda-forge/r
     - dpryan79
     - johanneskoester
     - bgruening
