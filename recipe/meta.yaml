@@ -1,5 +1,4 @@
-{% set version = "6.3.0" %}
-
+{% set version = '7.0.2' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,36 +7,39 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: Delaporte_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/Delaporte_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/Delaporte/Delaporte_{{ version }}.tar.gz
-  sha256: e0778e3837eab3c5a0884b7d2b51671e479a775a9423e2edda8d566fac289830
+    - {{ cran_mirror }}/src/contrib/Delaporte_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/Delaporte/Delaporte_{{ version }}.tar.gz
+  sha256: a76d24356afec0850f05ed3b26e8d3b6642d3feb54a198a666246997589aa662
 
 build:
-  number: 1001
-  merge_build_host: true  # [win]
+  merge_build_host: True  # [win]
+  number: 0
+  {% if r_base[0:3] == '3.5' %}
+  skip: True
+  {% endif %}
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{compiler('c')}}    # [linux]
-    - {{compiler('fortran') }}  # [not win]
-    - llvm-openmp          # [osx]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
+    - {{posix}}sed               # [win]
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
   host:
     - r-base
   run:
     - r-base
-    - llvm-openmp          # [osx]
+    - {{native}}gcc-libs         # [win]
 
 test:
   commands:
-    - $R -e "library('Delaporte')"  # [not win]
+    - $R -e "library('Delaporte')"           # [not win]
     - "\"%R%\" -e \"library('Delaporte')\""  # [win]
 
 about:
@@ -51,7 +53,31 @@ about:
     components. It has been studied in actuarial science as a frequency distribution
     which has more variability than the Poisson, but less than the negative binomial.
   license_family: BSD
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/BSD_2_clause'
+    - LICENSE
 
 extra:
   recipe-maintainers:
     - conda-forge/r
+
+# Package: Delaporte
+# Type: Package
+# Title: Statistical Functions for the Delaporte Distribution
+# Version: 7.0.2
+# Date: 2019-05-17
+# Authors@R: c(person(given="Avraham", family="Adler", role=c("aut", "cph", "cre"), email="Avraham.Adler@gmail.com", comment = c(ORCID = "0000-0002-3039-0703")))
+# Description: Provides probability mass, distribution, quantile, random-variate generation, and method-of-moments parameter-estimation functions for the Delaporte distribution. The Delaporte is a discrete probability distribution which can be considered the convolution of a negative binomial distribution with a Poisson distribution. Alternatively, it can be considered a counting distribution with both Poisson and negative binomial components. It has been studied in actuarial science as a frequency distribution which has more variability than the Poisson, but less than the negative binomial.
+# License: BSD_2_clause + file LICENSE
+# URL: https://bitbucket.org/aadler/delaporte
+# BugReports: https://bitbucket.org/aadler/delaporte/issues
+# Depends: R (>= 3.6.0)
+# Imports: stats
+# Suggests: testthat
+# ByteCompile: yes
+# NeedsCompilation: yes
+# Packaged: 2019-05-17 15:47:37 UTC; Parents
+# Author: Avraham Adler [aut, cph, cre] (<https://orcid.org/0000-0002-3039-0703>)
+# Maintainer: Avraham Adler <Avraham.Adler@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2019-05-17 20:50:24 UTC
