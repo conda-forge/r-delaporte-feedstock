@@ -15,7 +15,9 @@ source:
 build:
   merge_build_host: True  # [win]
   number: 0
-  skip: True  # [r_base[0:3] == '3.5']
+  {% if r_base[0:3] == '3.5' %}
+  skip: True
+  {% endif %}
   rpaths:
     - lib/R/lib/
     - lib/
