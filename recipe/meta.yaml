@@ -14,7 +14,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
-  number: 0
+  number: 1
   {% if r_base[0:3] == '3.5' %}
   skip: true
   {% endif %}
@@ -32,6 +32,8 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
+    - libblas
+    - liblapack
     - r-base
   run:
     - r-base
