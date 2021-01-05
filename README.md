@@ -3,7 +3,7 @@ About r-delaporte
 
 Home: https://bitbucket.org/aadler/delaporte
 
-Package license: BSD_2_clause
+Package license: BSD-2-Clause
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-delaporte-feedstock/blob/master/LICENSE.txt)
 
