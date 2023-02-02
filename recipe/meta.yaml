@@ -14,6 +14,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
+  skip: True              # [win]
   number: 0
   rpaths:
     - lib/R/lib/
@@ -21,23 +22,25 @@ build:
 
 requirements:
   build:
+    - cross-r-base {{ r_base }}        # [build_platform != target_platform]
     - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
     - {{ compiler('fortran') }}        # [not win]
     - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ posix }}filesystem        # [win]
+    - {{ posix }}filesystem            # [win]
     - {{ posix }}make
-    - {{ posix }}sed               # [win]
-    - {{ posix }}coreutils         # [win]
-    - {{ posix }}zip               # [win]
-    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+    - {{ posix }}sed                   # [win]
+    - {{ posix }}coreutils             # [win]
+    - {{ posix }}zip                   # [win]
+    - llvm-openmp                      # [osx]
+    - libgomp                          # [linux]
   host:
     - libblas
     - liblapack
     - r-base
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
+    - {{ native }}gcc-libs             # [win]
 
 test:
   commands:
@@ -45,7 +48,7 @@ test:
     - "\"%R%\" -e \"library('Delaporte')\""  # [win]
 
 about:
-  home: https://bitbucket.org/aadler/delaporte
+  home: https://github.com/aadler/Delaporte
   license: BSD-2-Clause
   summary: Provides probability mass, distribution, quantile, random-variate generation, and method-of-moments parameter-estimation functions for the Delaporte distribution. The Delaporte is a discrete probability distribution which can be considered the convolution of a negative binomial distribution with a Poisson distribution.
     Alternatively, it can be considered a counting distribution with both Poisson and negative binomial components. It has been studied in actuarial science as a frequency distribution which has more variability than the Poisson, but less than the negative binomial.
@@ -58,23 +61,4 @@ extra:
   recipe-maintainers:
     - conda-forge/r
 
-# Package: Delaporte
-# Type: Package
-# Title: Statistical Functions for the Delaporte Distribution
-# Version: 7.0.2
-# Date: 2019-05-17
-# Authors@R: c(person(given="Avraham", family="Adler", role=c("aut", "cph", "cre"), email="Avraham.Adler@gmail.com", comment = c(ORCID = "0000-0002-3039-0703")))
-# Description: Provides probability mass, distribution, quantile, random-variate generation, and method-of-moments parameter-estimation functions for the Delaporte distribution. The Delaporte is a discrete probability distribution which can be considered the convolution of a negative binomial distribution with a Poisson distribution. Alternatively, it can be considered a counting distribution with both Poisson and negative binomial components. It has been studied in actuarial science as a frequency distribution which has more variability than the Poisson, but less than the negative binomial.
-# License: BSD_2_clause + file LICENSE
-# URL: https://bitbucket.org/aadler/delaporte
-# BugReports: https://bitbucket.org/aadler/delaporte/issues
-# Depends: R (>= 3.6.0)
-# Imports: stats
-# Suggests: testthat
-# ByteCompile: yes
-# NeedsCompilation: yes
-# Packaged: 2019-05-17 15:47:37 UTC; Parents
-# Author: Avraham Adler [aut, cph, cre] (<https://orcid.org/0000-0002-3039-0703>)
-# Maintainer: Avraham Adler <Avraham.Adler@gmail.com>
-# Repository: CRAN
 # Date/Publication: 2019-05-17 20:50:24 UTC
