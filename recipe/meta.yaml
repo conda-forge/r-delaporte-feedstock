@@ -1,4 +1,4 @@
-{% set version = "8.3.0" %}
+{% set version = "8.4.0" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/Delaporte_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/Delaporte/Delaporte_{{ version }}.tar.gz
-  sha256: 7eeb59c2d7fb106732abbda710acab065418426aa1f6f5734f0dc2b1724f89bc
+  sha256: 59715b4b61c40723af5ce33b29b0a3be0504d4a0ba7eb57985b98c173b161fcb
 
 build:
   merge_build_host: true  # [win]
