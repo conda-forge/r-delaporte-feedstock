@@ -1,4 +1,4 @@
-{% set version = "8.4.1" %}
+{% set version = "8.4.2" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,12 +9,12 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/Delaporte_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/Delaporte/Delaporte_{{ version }}.tar.gz
-  sha256: 9b80ce53cbb7a4cf5d08a14a75b80db3c7006f20d0ef29372950971e849660bf
+  sha256: 8f44ab4a202397840e0a12fb9291c1477d9ce68b3d0459e93a88f79f65adcca6
 
 build:
   # Checking windows to see if it passes. Uncomment the line if it fails.
   # skip: true  # [win]
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
