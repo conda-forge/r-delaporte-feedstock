@@ -1,4 +1,4 @@
-{% set version = "8.4.3" %}
+{% set version = "9.0.0" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,7 +9,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/Delaporte_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/Delaporte/Delaporte_{{ version }}.tar.gz
-  sha256: af49300e5a2003cffbe80a7c70d7aa1358f7e35b5fce4c912b6890777387af0c
+  sha256: 277e620f376c803c0647b2e7dfc3a0ebae5b816b621d2125113acb2761c21413
 
 build:
   # Checking windows to see if it passes. Uncomment the line if it fails.
@@ -50,8 +50,8 @@ test:
 about:
   home: https://github.com/aadler/Delaporte
   license: BSD-2-Clause
-  summary: Provides probability mass, distribution, quantile, random-variate generation, and method-of-moments parameter-estimation functions for the Delaporte distribution. The Delaporte is a discrete probability distribution which can be considered the convolution of a negative binomial distribution with a Poisson distribution.
-    Alternatively, it can be considered a counting distribution with both Poisson and negative binomial components. It has been studied in actuarial science as a frequency distribution which has more variability than the Poisson, but less than the negative binomial.
+  summary: Provides probability mass, distribution, quantile, random-variate generation, and method-of-moments parameter-estimation functions for the Delaporte distribution. The Delaporte is a discrete probability distribution which can be considered the convolution of a negative binomial distribution with a Poisson 
+    distribution. Alternatively, it can be considered a counting distribution with both Poisson and negative binomial components. It has been studied in actuarial science as a frequency distribution which has more variability than the Poisson, but less than the negative binomial.
   license_family: BSD
   license_file:
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/BSD_2_clause
